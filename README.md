@@ -30,7 +30,21 @@ Run go mod to create the backend.
 
 ## Create a your first page with templ
 
+- i already have a the templ cli installed on my machine, and have enabled the templ vscode extension
+- run `go get github.com/a-h/templ`
+- create a layout component that will encapsulate all of the components in and run `templ generate`
+- wire up the layout temple to respond to the home route in the handler
+
 ## Add tailwind
+
+- I use node 20 to install tailwindcss.
+- add .nvmrc for the node 20 version that you have
+- `$ npm install -D tailwindcss && npx tailwindcss init` which creates a tailwind.config.js file
+- well create a static folder under src to hold all of our static assets like our css files
+- create a file called input.css this is where we will write our
+- run `npx tailwindcss -i ./src/static/input.css -o ./public/static/output.css --watch` this runs things in watch mode
+- in order to serve the css files, you need to create a file server and serve that as well to, create a new handler to handle requests for static files
+- a new learning experience, i got the file server to work, we use stripPrefix to remove the static prefix so that the file server , which uses the root will serve that file
 
 ## Add layout and other templ components
 
