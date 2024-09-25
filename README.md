@@ -20,4 +20,10 @@ Building a To Do app
 
 ## Getting Started
 
-Run go mod to create the backend
+Run go mod to create the backend.
+
+## Create a simple http server
+
+- create handler for the home route at /
+- addRoutes will be used to add routes
+- wire it up for the home page
