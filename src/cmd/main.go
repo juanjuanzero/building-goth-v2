@@ -1,10 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log/slog"
 	"net"
 	"net/http"
+	"os"
+
+	"github.com/juanjuanzero/building-goth-v2/src/handlers"
 )
 
 type server struct {
@@ -20,27 +22,14 @@ func NewServer(host string, port string, handler http.Handler) *server {
 	return &httpServer
 }
 
-// addRoutes requires services to be created and passed into it
-func addRoutes(
-	mux *http.ServeMux,
-) {
-	mux.HandleFunc("/", HandleHome)
-	slog.Debug("added all routes")
-}
-
-// TODO move to handlers
-// reply with the home page
-func HandleHome(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1>Hello There</h1>")
-}
-
 func main() {
 	// create handler
-	handle := http.NewServeMux()
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	handler := handlers.New(logger)
 	// add routes
-	addRoutes(handle)
+	handler.AddRoutes()
 	// start the server
-	slog.Debug("new server")
-	svr := NewServer("localhost", "8080", handle)
+	logger.Info("new server")
+	svr := NewServer("localhost", "8080", handler)
 	svr.http.ListenAndServe()
 }

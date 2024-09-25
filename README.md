@@ -27,3 +27,21 @@ Run go mod to create the backend.
 - create handler for the home route at /
 - addRoutes will be used to add routes
 - wire it up for the home page
+
+## Create a your first page with templ
+
+## Add tailwind
+
+## Add layout and other templ components
+
+## Add to do service
+
+## Wire up to do service in handlers to handle request to add TODO item
+
+## Expose other update, delete routes for todo, add htmx for interactivity
+
+## iterating on the UI, working with air and tailwind for auto-updates
+
+## persist TODO items, adding a sqlLite instance
+
+## add user login using clerk
