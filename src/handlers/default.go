@@ -9,19 +9,31 @@ import (
 )
 
 type ServerHandler struct {
-	Mux *http.ServeMux
-	Log *slog.Logger
+	Mux         *http.ServeMux
+	Log         *slog.Logger
+	TodoHandler *TodoHandler
 }
 
 func New(log *slog.Logger) *ServerHandler {
-	return &ServerHandler{
+	srv := &ServerHandler{
 		Mux: http.NewServeMux(),
 		Log: log,
 	}
+	srv.bootstrap()
+	return srv
+}
+
+func (sh *ServerHandler) bootstrap() {
+	sh.TodoHandler = &TodoHandler{Logger: sh.Log, BaseRoute: "/todo"}
+	sh.addRoutes()
 }
 
 // addRoutes requires services to be created and passed into it
-func (sh *ServerHandler) AddRoutes() {
+func (sh *ServerHandler) addRoutes() {
+	sh.Mux.HandleFunc("POST /todo/add", sh.TodoHandler.Add)
+	sh.Mux.HandleFunc("GET /todo/{id}", sh.TodoHandler.Get)
+	sh.Mux.HandleFunc("POST /todo/{id}", sh.TodoHandler.Update)
+
 	sh.Mux.Handle("/static/*", http.StripPrefix("/static", HandleStatic()))
 	sh.Mux.HandleFunc("/", HandleHome)
 	sh.Log.Info("added all routes")

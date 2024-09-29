@@ -24,10 +24,8 @@ func NewServer(host string, port string, handler http.Handler) *server {
 
 func main() {
 	// create handler
-	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
 	handler := handlers.New(logger)
-	// add routes
-	handler.AddRoutes()
 	// start the server
 	logger.Info("new server")
 	svr := NewServer("localhost", "8080", handler)

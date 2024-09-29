@@ -46,11 +46,16 @@ Run go mod to create the backend.
 - in order to serve the css files, you need to create a file server and serve that as well to, create a new handler to handle requests for static files
 - a new learning experience, i got the file server to work, we use stripPrefix to remove the static prefix so that the file server , which uses the root will serve that file
 
-## Add layout and other templ components
-
 ## Add to do service
 
+- a handler is like a controller and handlers uses services
+- add a service for todos with funcs like add, update, and get
+
 ## Wire up to do service in handlers to handle request to add TODO item
+
+- add a handler that wires up service and wire up the handler for the route
+- test the api routes, maybe use bruno
+  - simpler to use curl `curl --request POST --url localhost:8080/todo/add --data '{"todoItem": { "id": "something", "task":"test add method"}}'`
 
 ## Expose other update, delete routes for todo, add htmx for interactivity
 
@@ -59,3 +64,8 @@ Run go mod to create the backend.
 ## persist TODO items, adding a sqlLite instance
 
 ## add user login using clerk
+
+## deciding how to host
+
+- totally free would be through aws lambda or some serverless offering
+- we can also host in a vps, this is the current way we are building right now but its not a big lift to shift to a vps, since the main diff that i know of is through how the static files are hosted. Look at templ's deployment story

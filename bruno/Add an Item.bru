@@ -1,0 +1,21 @@
+meta {
+  name: Add an Item
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/todo/add
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "todoItem": {
+      "id": "something",
+      "task": "test add route",
+      "due": "2024-09-27T13:15:50+00:00"
+    }
+  }
+}

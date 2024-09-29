@@ -1,0 +1,19 @@
+meta {
+  name: Update an Item
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/todo/something
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "something",
+    "task": "test update route",
+    "due": "2024-09-27T13:15:50+00:00"
+  }
+}
