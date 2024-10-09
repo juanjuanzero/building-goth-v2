@@ -47,3 +47,7 @@ func Update(todo ToDoItem) (ToDoItem, error) {
 	ToDoItems[todo.Id] = retrieved
 	return retrieved, nil
 }
+
+func Delete(id string) {
+	delete(ToDoItems, id)
+}

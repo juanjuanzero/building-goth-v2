@@ -32,7 +32,8 @@ func (sh *ServerHandler) bootstrap() {
 func (sh *ServerHandler) addRoutes() {
 	sh.Mux.HandleFunc("POST /todo/add", sh.TodoHandler.Add)
 	sh.Mux.HandleFunc("GET /todo/{id}", sh.TodoHandler.Get)
-	sh.Mux.HandleFunc("POST /todo/{id}", sh.TodoHandler.Update)
+	sh.Mux.HandleFunc("PUT /todo/{id}", sh.TodoHandler.Update)
+	sh.Mux.HandleFunc("DELETE /todo/{id}", sh.TodoHandler.Delete)
 
 	sh.Mux.Handle("/static/*", http.StripPrefix("/static", HandleStatic()))
 	sh.Mux.HandleFunc("/", HandleHome)

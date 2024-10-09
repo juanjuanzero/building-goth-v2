@@ -56,8 +56,13 @@ Run go mod to create the backend.
 - add a handler that wires up service and wire up the handler for the route
 - test the api routes, maybe use bruno
   - simpler to use curl `curl --request POST --url localhost:8080/todo/add --data '{"todoItem": { "id": "something", "task":"test add method"}}'`
+  - using bruno is easy...
+- had to use handler func in the default because of the way i wrote something out, this makes serveHttp useless...
+- i also noticed that i didnt write test, maybe we can use httptest as well, for unit tests?
 
 ## Expose other update, delete routes for todo, add htmx for interactivity
+
+- how do you return an http status using the handler? use the writeHeader to return specific status codes
 
 ## iterating on the UI, working with air and tailwind for auto-updates
 
@@ -67,5 +72,6 @@ Run go mod to create the backend.
 
 ## deciding how to host
 
+- just host it on render for now, should be free with the hobby plan
 - totally free would be through aws lambda or some serverless offering
 - we can also host in a vps, this is the current way we are building right now but its not a big lift to shift to a vps, since the main diff that i know of is through how the static files are hosted. Look at templ's deployment story

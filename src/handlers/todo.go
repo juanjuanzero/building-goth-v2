@@ -19,6 +19,7 @@ type TodoHandler struct {
 	BaseRoute string
 }
 
+// no obsolete
 func (th *TodoHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	th.Logger.Info(fmt.Sprintf("uri: %v, method: %v\n", r.RequestURI, r.Method))
 	if r.RequestURI == fmt.Sprintf("/%v/add", th.BaseRoute) {
@@ -61,6 +62,7 @@ func (th *TodoHandler) Get(w http.ResponseWriter, r *http.Request) {
 	item, err := todo.Get(id)
 	if err != nil {
 		th.Logger.Error(err.Error())
+		w.WriteHeader(http.StatusNotFound)
 	}
 
 	itemB, err := json.Marshal(item)
@@ -86,4 +88,12 @@ func (th *TodoHandler) Add(w http.ResponseWriter, r *http.Request) {
 	}
 	todo.Add(request.Todo)
 	th.Logger.Info(fmt.Sprintf("added: %+v", request.Todo))
+}
+
+func (th *TodoHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	// read from the request
+	id := r.PathValue("id")
+	todo.Delete(id)
+	w.WriteHeader(http.StatusNoContent)
+	w.Write([]byte(`deleted`))
 }
