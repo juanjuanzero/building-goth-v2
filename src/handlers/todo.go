@@ -1,12 +1,14 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
 
+	"github.com/juanjuanzero/building-goth-v2/src/components"
 	"github.com/juanjuanzero/building-goth-v2/src/services/todo"
 )
 
@@ -54,6 +56,13 @@ func (th *TodoHandler) Update(w http.ResponseWriter, r *http.Request) {
 		th.Logger.Error(err.Error())
 	}
 	w.Write(itemB)
+}
+
+func (th *TodoHandler) GetAll(w http.ResponseWriter, r *http.Request) {
+	data := todo.GetAll()
+	table := components.ToDoTable(data)
+	page := components.Layout(table)
+	page.Render(context.Background(), w)
 }
 
 func (th *TodoHandler) Get(w http.ResponseWriter, r *http.Request) {

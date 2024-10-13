@@ -1,6 +1,6 @@
 package components
 
-templ Layout() {
+templ Layout(content templ.Component) {
 	<html>
 		<head>
 			<meta charset="UTF-8"/>
@@ -9,7 +9,7 @@ templ Layout() {
 		</head>
 		<body>
 			<div class="text-3xl font-bold underline bg-slate-150">
-				templ layout
+				@content
 			</div>
 		</body>
 	</html>

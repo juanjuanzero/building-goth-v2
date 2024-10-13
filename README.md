@@ -66,6 +66,13 @@ Run go mod to create the backend.
 
 ## iterating on the UI, working with air and tailwind for auto-updates
 
+- add a model for todos
+- add templ components to display the entire page and a button to add todos
+  - component for the table that displays to do items
+  - component for
+- make temple components that handle update interaction, go into edit a component when clicking then a button to save changes
+- make template components that handle delete the todo
+
 ## persist TODO items, adding a sqlLite instance
 
 ## add user login using clerk
@@ -75,3 +82,8 @@ Run go mod to create the backend.
 - just host it on render for now, should be free with the hobby plan
 - totally free would be through aws lambda or some serverless offering
 - we can also host in a vps, this is the current way we are building right now but its not a big lift to shift to a vps, since the main diff that i know of is through how the static files are hosted. Look at templ's deployment story
+
+## Some things i noticed
+
+- i get distracted by futures that may never even happen
+- i messed up the software architecture here.... need to do domains, would be much more comprehensible

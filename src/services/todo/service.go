@@ -25,6 +25,10 @@ func Add(todo ToDoItem) {
 	ToDoItems[todo.Id] = todo
 }
 
+func GetAll() map[string]ToDoItem {
+	return ToDoItems
+}
+
 func Get(id string) (ToDoItem, error) {
 	retrieved, ok := ToDoItems[id]
 	if !ok {

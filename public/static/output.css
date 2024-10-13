@@ -554,8 +554,8 @@ video {
   display: none;
 }
 
-.static {
-  position: static;
+.table {
+  display: table;
 }
 
 .text-3xl {

@@ -1,1 +1,2 @@
-<html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link href=\"static/output.css\" rel=\"stylesheet\" type=\"text/css\"></head><body><div class=\"text-3xl font-bold underline bg-slate-150\">templ layout</div></body></html>
+<html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link href=\"static/output.css\" rel=\"stylesheet\" type=\"text/css\"></head><body><div class=\"text-3xl font-bold underline bg-slate-150\">
+</div></body></html>
