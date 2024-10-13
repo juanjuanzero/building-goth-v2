@@ -8,9 +8,10 @@ templ Layout(content templ.Component) {
 			<link href="static/output.css" rel="stylesheet" type="text/css"/>
 		</head>
 		<body>
-			<div class="text-3xl font-bold underline bg-slate-150">
+			<div class="flex h-screen flex-row justify-center items-center">
 				@content
 			</div>
 		</body>
+		<script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 	</html>
 }

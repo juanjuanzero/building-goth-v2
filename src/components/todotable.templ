@@ -3,21 +3,32 @@ package components
 import "github.com/juanjuanzero/building-goth-v2/src/services/todo"
 
 templ ToDoTable(items map[string]todo.ToDoItem) {
-	<table>
+	<table class="table-auto">
 		<thead>
 			<tr>
 				<th>Task </th>
 				<th>Due </th>
-				<th>Complete </th>
 			</tr>
 		</thead>
 		<tbody>
 			for _, item := range items {
-				<tr>
+				<tr class="py-3">
 					<td>{ item.Task }</td>
 					<td>{ item.Due.String() }</td>
 				</tr>
 			}
 		</tbody>
+		<form hx-post="/todo/add">
+			<tbody>
+				<tr class="py-3">
+					<td>
+						<input type="text" name="task"/>
+					</td>
+					<td>
+						<input type="date" name="due"/>
+					</td>
+				</tr>
+			</tbody>
+		</form>
 	</table>
 }

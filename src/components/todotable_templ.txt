@@ -1,5 +1,5 @@
-<table><thead><tr><th>Task </th><th>Due </th><th>Complete </th></tr></thead> <tbody>
-<tr><td>
+<table class=\"table-auto\"><thead><tr><th>Task </th><th>Due </th></tr></thead> <tbody>
+<tr class=\"py-3\"><td>
 </td><td>
 </td></tr>
-</tbody></table>
+</tbody><form hx-post=\"/todo/add\"><tbody><tr class=\"py-3\"><td><input type=\"text\" name=\"task\"></td><td><input type=\"date\" name=\"due\"></td></tr></tbody></form></table>

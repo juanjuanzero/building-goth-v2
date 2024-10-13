@@ -7,6 +7,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"time"
 
 	"github.com/juanjuanzero/building-goth-v2/src/components"
 	"github.com/juanjuanzero/building-goth-v2/src/services/todo"
@@ -84,19 +85,23 @@ func (th *TodoHandler) Get(w http.ResponseWriter, r *http.Request) {
 
 func (th *TodoHandler) Add(w http.ResponseWriter, r *http.Request) {
 	// parse the request body to get the item
-	defer r.Body.Close()
-	data, err := io.ReadAll(r.Body)
-	if err != nil {
+	if err := r.ParseForm(); err != nil {
 		th.Logger.Info("err")
 	}
-	var request TodoRequest
-	err = json.Unmarshal(data, &request)
 
+	todoAction := r.FormValue("task")
+	due := r.FormValue("due")
+	dueDate, err := time.Parse(time.DateOnly, due)
 	if err != nil {
-		th.Logger.Info("err")
+		th.Logger.Error("err")
 	}
-	todo.Add(request.Todo)
-	th.Logger.Info(fmt.Sprintf("added: %+v", request.Todo))
+
+	var request todo.ToDoItem
+	request.Task = todoAction
+	request.Due = dueDate
+
+	todo.Add(request)
+	th.Logger.Info(fmt.Sprintf("added: %+v", request))
 }
 
 func (th *TodoHandler) Delete(w http.ResponseWriter, r *http.Request) {
