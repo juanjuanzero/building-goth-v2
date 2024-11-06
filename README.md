@@ -1,6 +1,6 @@
 # Exploring the GOTH Stack:
 
-Building a To Do app
+Building a simple To Do app
 
 ## Stack Details:
 
