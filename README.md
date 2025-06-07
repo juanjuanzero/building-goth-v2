@@ -87,3 +87,9 @@ Run go mod to create the backend.
 
 - i get distracted by futures that may never even happen
 - i messed up the software architecture here.... need to do domains, would be much more comprehensible
+
+## Revisiting after a while
+
+- picking things up whee i left this off, i messed up the htmx work, we are overwriting the todo items after every add, could be a handler issue
+- would be nice to have a button
+- also maybe add air

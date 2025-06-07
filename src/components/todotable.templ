@@ -1,34 +1,44 @@
 package components
 
-import "github.com/juanjuanzero/building-goth-v2/src/services/todo"
+import (
+"github.com/juanjuanzero/building-goth-v2/src/services/todo"
+"time"
+)
+
+templ ToDoItemRow(item todo.ToDoItem) {
+<tr class="py-3">
+	<td>{ item.Task }</td>
+	<td>{ item.Due.Format(time.DateOnly) }</td>
+</tr>
+}
 
 templ ToDoTable(items map[string]todo.ToDoItem) {
-	<table class="table-auto">
-		<thead>
-			<tr>
-				<th>Task </th>
-				<th>Due </th>
+<table class="table-auto" id="todo-table">
+	<thead>
+		<tr>
+			<th>Task </th>
+			<th>Due </th>
+		</tr>
+	</thead>
+	<tbody id="todo-list">
+		for _, item := range items {
+		<tr class="py-3">
+			<td>{ item.Task }</td>
+			<td>{ item.Due.Format(time.DateOnly) }</td>
+		</tr>
+		}
+	</tbody>
+	<tbody>
+		<form hx-post="/todo/add" hx-target="#todo-list" hx-swap="beforeend" hx-on::after-request="this.reset()">
+			<tr class="py-3">
+				<td>
+					<input type="text" name="task" />
+				</td>
+				<td>
+					<input type="date" name="due" />
+				</td>
 			</tr>
-		</thead>
-		<tbody>
-			for _, item := range items {
-				<tr class="py-3">
-					<td>{ item.Task }</td>
-					<td>{ item.Due.String() }</td>
-				</tr>
-			}
-		</tbody>
-		<form hx-post="/todo/add">
-			<tbody>
-				<tr class="py-3">
-					<td>
-						<input type="text" name="task"/>
-					</td>
-					<td>
-						<input type="date" name="due"/>
-					</td>
-				</tr>
-			</tbody>
 		</form>
-	</table>
+	</tbody>
+</table>
 }

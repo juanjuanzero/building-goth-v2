@@ -22,22 +22,6 @@ type TodoHandler struct {
 	BaseRoute string
 }
 
-// no obsolete
-func (th *TodoHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	th.Logger.Info(fmt.Sprintf("uri: %v, method: %v\n", r.RequestURI, r.Method))
-	if r.RequestURI == fmt.Sprintf("/%v/add", th.BaseRoute) {
-		th.Add(w, r)
-	}
-
-	if r.Method == "GET" {
-		th.Get(w, r)
-	}
-
-	if r.Method == "POST" {
-		th.Update(w, r)
-	}
-}
-
 func (th *TodoHandler) Update(w http.ResponseWriter, r *http.Request) {
 	// unmarshall
 	var item todo.ToDoItem
@@ -93,15 +77,19 @@ func (th *TodoHandler) Add(w http.ResponseWriter, r *http.Request) {
 	due := r.FormValue("due")
 	dueDate, err := time.Parse(time.DateOnly, due)
 	if err != nil {
-		th.Logger.Error("err")
+		th.Logger.Warn("error parsing date", "err", err)
+		dueDate = time.Now()
 	}
 
 	var request todo.ToDoItem
 	request.Task = todoAction
 	request.Due = dueDate
+	request.Id = fmt.Sprintf("%v,%v", todoAction, dueDate.String())
 
 	todo.Add(request)
 	th.Logger.Info(fmt.Sprintf("added: %+v", request))
+	row := components.ToDoItemRow(request)
+	row.Render(context.Background(), w)
 }
 
 func (th *TodoHandler) Delete(w http.ResponseWriter, r *http.Request) {
